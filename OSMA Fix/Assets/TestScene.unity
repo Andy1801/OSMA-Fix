@@ -210,6 +210,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &774213826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 774213827}
+  m_Layer: 0
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &774213827
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 774213826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1757927950}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005209971
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,8 +396,9 @@ GameObject:
   - component: {fileID: 1757927948}
   - component: {fileID: 1757927947}
   - component: {fileID: 1757927946}
-  - component: {fileID: 1757927951}
   - component: {fileID: 1757927952}
+  - component: {fileID: 1757927951}
+  - component: {fileID: 1757927953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -472,7 +501,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 1.5, y: 3, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 774213827}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -482,14 +512,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1757927945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a119be73b839754419a417f43ac4d2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalModifier: 10
-  verticalModifier: 100
-  verticalLerpModifier: 0.5
+  verticalModifier: 2000
+  verticalLerpModifier: 0.7
 --- !u!114 &1757927952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,3 +531,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec0bed70fd2cf5479ededfda673a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1757927953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1757927945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbfa4b43f912cd4ba81cd3d42d3c158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalModifier: 10
+  verticalModifier: 500

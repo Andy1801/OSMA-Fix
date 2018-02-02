@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransformPlayerMovement : MonoBehaviour {
+public class PhysicsPlayerMovement : MonoBehaviour {
 
     public float horizontalModifier;
     public float verticalModifier;
-    public float verticalLerpModifier;
-
-    private float jump;
 
     private Vector2 newPosition;
+
+    private Transform feet;
 
     private IsGrounded groundCheck;
     private Rigidbody2D rb2D;
@@ -18,23 +17,22 @@ public class TransformPlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        jump = 0.0f;
-        
         newPosition = Vector2.zero;
+
+        feet = GetComponentInChildren<Transform>();
 
         groundCheck = GetComponent<IsGrounded>();
         rb2D = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void FixedUpdate ()
+    {
         newPosition.x = HorizontalMovement();
-        newPosition.y = VerticalMovement();
 
-        Debug.Log(newPosition.y);
+        VerticalMovement();
 
-        transform.Translate(newPosition);
+        rb2D.position += newPosition;
 	}
 
     private float HorizontalMovement()
@@ -44,17 +42,18 @@ public class TransformPlayerMovement : MonoBehaviour {
         return horizontal * horizontalModifier * Time.deltaTime;
     }
 
-    private float VerticalMovement()
+    private void VerticalMovement()
     {
         if (Input.GetButtonDown("Vertical") && groundCheck.Grounded)
         {
-            jump = verticalModifier * Time.deltaTime;
+            rb2D.AddForceAtPosition(new Vector2(0.0f, 1 * verticalModifier), feet.position);
         }
-        else if (groundCheck.Grounded)
-            jump = 0.0f;
+    }
 
-        jump = Mathf.Lerp(0.0f, jump, verticalLerpModifier);
+    private Vector2 AddToTransform()
+    {
+        Vector3 holdPosition = newPosition;
 
-        return jump * Time.deltaTime;
+        return transform.position += holdPosition;
     }
 }
