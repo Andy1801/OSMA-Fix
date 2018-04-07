@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpTime: 0.2
+  transformBuffer: {x: 0.5, y: 0, z: 0}
 --- !u!33 &1132837334
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ GameObject:
   - component: {fileID: 1911180370}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

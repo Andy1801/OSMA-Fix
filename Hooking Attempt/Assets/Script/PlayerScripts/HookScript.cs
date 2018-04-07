@@ -16,24 +16,42 @@ using UnityEngine;
 public class HookScript : MonoBehaviour {
 
     public float lerpTime;
+    public Vector3 transformBuffer;
 
     private bool hookShot;
+
+    private Transform player;
 
     private Vector3 newPosition;
     private Vector3 originalPosition;
 
 	// Use this for initialization
 	void Start () {
+
+        //Fix this problem
+        /*Transform[] temp;
+        temp = GetComponentsInParent<Transform>();
+
+        foreach (GameObject check in temp)
+        {
+            if (check.CompareTag("Player"))
+                player = check.transform;
+        }
+
+        Debug.Log(player.gameObject.name);*/
+
         hookShot = false;
 
         newPosition = Vector2.zero;
-        originalPosition = transform.position;
+        originalPosition = player.position + transformBuffer;
         
 	}
 	
     // Update is called every frame
 	void Update () {
         hookMovement();
+
+        originalPosition = player.position + transformBuffer;
 	}
 
     //Checks the distance between the transform and the orginal position.
@@ -60,7 +78,6 @@ public class HookScript : MonoBehaviour {
         // else continue moving the hook towards the new position.
         if (checkPosition() < Mathf.Epsilon && hookShot)
         {
-            Debug.Log("Inside check if");
             transform.position = originalPosition;
             hookShot = false;
         }
