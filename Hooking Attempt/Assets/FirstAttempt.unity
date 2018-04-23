@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpTime: 0.2
-  transformBuffer: {x: 0.5, y: 0, z: 0}
+  transformBuffer: {x: 0.5, y: 0, z: -5}
 --- !u!33 &1132837334
 MeshFilter:
   m_ObjectHideFlags: 0

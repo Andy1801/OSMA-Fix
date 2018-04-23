@@ -7,6 +7,10 @@ using UnityEngine;
 /// The script focuses on both the players horizontal and vertical movement.
 /// It performs checks for both of those sperate in order to better handle 
 /// collision as well as fine tune the movement.
+/// 
+/// FIXME:
+/// Forward velocity doesn't just stop in the middle of a jump.
+/// Get the rigidbody for feet
 /// </summary>
 
 public class PlayerMovement : MonoBehaviour {
@@ -27,7 +31,8 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
         check = GetComponent<IsGrounded>();
 
-        feet = GetComponentInChildren<Transform>(); 
+        feet = GetComponentInChildren<Transform>();
+
         rb2D = GetComponent<Rigidbody2D>();
 	}
 
@@ -65,7 +70,7 @@ public class PlayerMovement : MonoBehaviour {
     private void VerticalMovement()
     {
         // Checks for correct key press as well as if the player is grounded
-        if (Input.GetKeyDown(KeyCode.Space) && check.Grounded)
+        if (Input.GetButtonDown("Jump") && check.Grounded)
         {
             // Sets whatever velocity the player had before hand to zero 
             // to avoid any strange long jumps
