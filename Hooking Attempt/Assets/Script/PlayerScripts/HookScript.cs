@@ -9,7 +9,7 @@ using UnityEngine;
 /// 
 /// FIXES NEEDED:
 /// Make it so you can shoot the hook while moving
-/// Change the hook so it moves with your mouse. (try rotating on the z-axis)
+/// Change the hook so it moves with your mouse. 
 /// Check for layer detection using the hook.
 /// Check the proximity of mathf.epsilon to see if their is a better comparision.
 /// </summary>
@@ -74,16 +74,31 @@ public class HookScript : MonoBehaviour {
     // Meant to move the hook to where the mouse is pointing relative to the player
     private void mouseTrack()
     {
-        /*Vector3 changePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 changePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log("Mouse: " + changePosition);
 
+        // Finds the clamp on X-axis based on the players position and half of their X-localscale.
         float clampX = player.position.x + xHalfSize;
+        float negClampX = player.position.x - xHalfSize;
+
+        // Finds the clamp on Y-axis based on the players position and half of their Y-Localscale.
         float clampY = player.position.y + yHalfSize;
+        float negClampY = player.position.y - yHalfSize;
 
-        newPosition.x = Mathf.Clamp(changePosition.x, -clampX, clampX);
-        newPosition.y = Mathf.Clamp(changePosition.y, -clampY, clampY);
+        // Clamps the mouses position to that of the X clamp and Y clamps found above
+        newPosition.x = Mathf.Clamp(changePosition.x, negClampX, clampX);
+        newPosition.y = Mathf.Clamp(changePosition.y, negClampY, clampY);
 
-        transform.localPosition = new Vector3(newPosition.x, newPosition.y, -5f);*/
+        // Checks for if the mouse is inside the player
+        bool checkX = (newPosition.x < clampX) && (newPosition.x > negClampX);
+        bool checkY = (newPosition.y < clampY) && (newPosition.y > negClampY);
+
+        Debug.Log("Check X: " + checkX);
+        Debug.Log("Check Y: " + checkY);
+
+        // if the mouse is inside the player then do not move the hook.
+        if (!checkX || !checkY)
+            transform.position = new Vector3(newPosition.x, newPosition.y, -5f);
     }
 
     //Setups the timer as well as the hooks position to be shot
@@ -127,6 +142,7 @@ public class HookScript : MonoBehaviour {
     {
         Gizmos.DrawLine(transform.position, newPosition);
     }
+
     //Moves the hook from originalPosition to newPosition and then resets
     /*private void hookMovement()
     {
