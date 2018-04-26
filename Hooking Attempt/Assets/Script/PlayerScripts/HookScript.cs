@@ -9,7 +9,7 @@ using UnityEngine;
 /// 
 /// FIXES NEEDED:
 /// Make it so you can shoot the hook while moving
-/// Change the hook so it moves with your mouse. 
+/// Check if you can make the movement have a smoother rotation around the player.
 /// Check for layer detection using the hook.
 /// Check the proximity of mathf.epsilon to see if their is a better comparision.
 /// </summary>
@@ -83,15 +83,17 @@ public class HookScript : MonoBehaviour {
 
         // Finds the clamp on Y-axis based on the players position and half of their Y-Localscale.
         float clampY = player.position.y + yHalfSize;
-        float negClampY = player.position.y - yHalfSize;
+
+        ///REMEMBER: By turing this on the hook will not move around while inside the bottom of the player
+        //float negClampY = player.position.y - yHalfSize;
 
         // Clamps the mouses position to that of the X clamp and Y clamps found above
         newPosition.x = Mathf.Clamp(changePosition.x, negClampX, clampX);
-        newPosition.y = Mathf.Clamp(changePosition.y, negClampY, clampY);
+        newPosition.y = Mathf.Clamp(changePosition.y, player.position.y, clampY);
 
         // Checks for if the mouse is inside the player
         bool checkX = (newPosition.x < clampX) && (newPosition.x > negClampX);
-        bool checkY = (newPosition.y < clampY) && (newPosition.y > negClampY);
+        bool checkY = (newPosition.y < clampY) && (newPosition.y > player.position.y);
 
         Debug.Log("Check X: " + checkX);
         Debug.Log("Check Y: " + checkY);
