@@ -447,9 +447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f61a5b22d213ab4793706ede221684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xChange: 2
+  yChange: 2
   lerpTime: 0.2
   transformBuffer: {x: 0.5, y: 0, z: -5}
-  timeBuffer: 2
+  timeBuffer: 0.5
 --- !u!33 &1132837334
 MeshFilter:
   m_ObjectHideFlags: 0

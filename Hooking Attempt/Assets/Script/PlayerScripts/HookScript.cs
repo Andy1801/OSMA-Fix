@@ -15,9 +15,15 @@ using UnityEngine;
 
 public class HookScript : MonoBehaviour {
 
+    public float xChange;
+    public float yChange;
+
     public float lerpTime;
     public Vector3 transformBuffer;
     public float timeBuffer;
+
+    private float xDifference;
+    private float yDifference;
 
     private MouseTracking hookTracking;
     private bool hookShot;
@@ -66,6 +72,8 @@ public class HookScript : MonoBehaviour {
     {
         //Only runs once well the hook is being shot
         hookShot = true;
+        xDifference = transform.position.x / xChange;
+        yDifference = transform.position.y / yChange;
         hookShotTime = Time.time + timeBuffer;
     }
 
@@ -85,7 +93,10 @@ public class HookScript : MonoBehaviour {
     //Moves hook for a certain period of time in a general direction.
     private void hookMovement()
     {
+       
 
+
+        transform.position = new Vector3(transform.position.x + xDifference, transform.position.x + yDifference, transform.position.z);
     }
 
     //Moves the hook from originalPosition to newPosition and then resets
